@@ -1,6 +1,6 @@
 # Winograd Convolution
 
 ```python
-make setup
-python main.py
+$ make setup
+$ python main.py
 ```
