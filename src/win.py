@@ -1,16 +1,11 @@
-'''
-    File: win.py
-    Author: Alex lee
-    Date: Jan 29 2018
-'''
 import numpy as np
 
+
 class Win23:
-    '''
-    Winograd convolution for F(2,3)
-    IA.shape = 4x4
-    W.shape  = 3x3
-    OA.shape = 2x2
+    ''' Winograd convolution for F(2,3)
+        + IA.shape = 4x4
+        + W.shape  = 3x3
+        + OA.shape = 2x2
     '''
     def __init__(self):
         self.AT = np.array([[1,1,1,0],[0,1,-1,1]])
@@ -23,14 +18,12 @@ class Win23:
         self.W_wino = None
         self.IA_wino = None
 
-    def forward(self, IA, W):
-        # G W GT
+    def compute(self, IA, W):
+        # G W GT transform
         self.W_wino = np.dot(np.dot(self.G, W), self.GT)
-        # BT IA B
+        # BT IA B transform
         self.IA_wino = np.dot(np.dot(self.BT, IA), self.B)
         # Winograd-domian matrix mult
         P = self.W_wino * self.IA_wino
-        # AT P A
-        result = np.dot(np.dot(self.AT, P), self.A)
-
-        return (result)
+        # AT P A inverse transform
+        return np.dot(np.dot(self.AT, P), self.A)
