@@ -5,6 +5,8 @@ from src.utils import Utils
 
 
 if __name__ == '__main__':
+    ''' The bare minimal convolution test for F(2,3)
+    '''
     win_conv = Win23()
     conv_param = {'stride':1, 'pad':0}
     sparsity = 1.0
