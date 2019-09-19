@@ -9,3 +9,4 @@
 /tests/._*
 /tests/._.*
 /tests/*.pyc
+*.pyc
