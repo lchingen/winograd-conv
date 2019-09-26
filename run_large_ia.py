@@ -28,9 +28,8 @@ if __name__ == '__main__':
                                             sparsity=sparsity
                                     )
 
-    # compute golden and winograd results
+    # compute custom winograd results
     result = np.zeros([ia_size-w_size+1, ia_size-w_size+1])
-
     for i in range((ia_size-w_size+1)//oa_chunk_size):
         for k in range((ia_size-w_size+1)//oa_chunk_size):
             ia_chunk = ia[f23_ovlp*i : f23_ovlp*i+4,
@@ -40,11 +39,8 @@ if __name__ == '__main__':
             result[f23_ovlp*i : f23_ovlp*i+f23_ovlp,
                    f23_ovlp*k : f23_ovlp*k+f23_ovlp] = oa_chunk
 
+    # compute golden winograd results
     golden = Utils.gen_conv_golden(ia_tensor, w_tensor, conv_param)
 
-    # test if the results are equal
-    print('------------------------------------')
-    print('Golden Result:\n{}\n'.format(golden))
-    print('Winograd Result:\n{}'.format(result))
-    print('------------------------------------')
-    assert np.isclose(golden, result).all(), 'Results Mismatch!'
+    # check and compare results
+    Utils.check_results(golden, result)

@@ -21,8 +21,5 @@ if __name__ == '__main__':
     golden = Utils.gen_conv_golden(ia_tensor, w_tensor, conv_param)
     result = win_conv.compute(ia, w)
 
-    print('------------------------------------')
-    print('Golden Result:\n{}\n'.format(golden))
-    print('Winograd Result:\n{}'.format(result))
-    print('------------------------------------')
-    assert np.isclose(golden, result).all(), 'Results Mismatch!'
+    # check and compare results
+    Utils.check_results(golden, result)

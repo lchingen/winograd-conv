@@ -59,3 +59,11 @@ class Utils:
             return (ia, w, ia_tensor, w_tensor)
         else:
             return (ia, w)
+
+    @staticmethod
+    def check_results(golden, custom):
+        print('------------------------------------')
+        print('Golden Results:\n{}\n'.format(golden))
+        print('Custom Results:\n{}'.format(custom))
+        print('------------------------------------')
+        assert np.isclose(golden, custom).all(), 'Results Mismatch!'
